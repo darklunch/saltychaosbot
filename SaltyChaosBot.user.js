@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Automated betting bot for SaltyBet that blends cryptographically secure coinflips with a touch of absurdist chaos and dynamic art.
 // @author       unsoundlogic (Dark Lunch Studios)
-// @match        https://www.saltybet.com/*
+// @match        https://www.saltybet.com/
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_addStyle
