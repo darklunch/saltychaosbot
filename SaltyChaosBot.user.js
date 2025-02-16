@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         SaltyChaosBot
-// @namespace    http://tampermonkey.net/
+// @namespace    http://darklun.ch/
 // @version      1.0
 // @description  Automated betting bot for SaltyBet that blends cryptographically secure coinflips with a touch of absurdist chaos and dynamic art.
 // @author       unsoundlogic (Dark Lunch Studios)
