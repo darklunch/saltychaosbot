@@ -2,6 +2,8 @@
 
 Welcome to **SaltyChaosBot**—an automated betting bot for [SaltyBet](https://www.saltybet.com/) that marries cryptographically secure randomness with a touch of absurdist chaos and ever-shifting digital art. Born from the creative minds at Dark Lunch Studios and crafted by unsoundlogic, this script doesn't just bet—it performs a kinetic, colorful dance of chance and artistry.
 
+Pro-tip: Although anecdotal I find you have the best luck when the dot in the top right corner is green. If it's red or blue you are going to have a bad time.
+
 ---
 
 ## Table of Contents
