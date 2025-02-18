@@ -349,7 +349,52 @@ class SaltyBetBot {
     }
 
     async secureCoinFlip() {
-        return await this.butterflyEffectFlip();
+        try {
+            // Try primary quantum source (ANU QRNG)
+            try {
+                const quantumResponse = await fetch('https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8', {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+                    },
+                    timeout: 2000
+                });
+                if (quantumResponse.ok) {
+                    const quantumData = await quantumResponse.json();
+                    console.log('Using ANU QRNG quantum source');
+                    return quantumData.data[0] % 2 === 1;
+                }
+            } catch (e) {
+                console.warn('Primary quantum source failed:', e);
+            }
+
+            // Fallback to Random.org
+            try {
+                const randomOrgResponse = await fetch('https://www.random.org/integers/?num=1&min=0&max=255&col=1&base=10&format=plain&rnd=new', {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+                    },
+                    timeout: 2000
+                });
+                if (randomOrgResponse.ok) {
+                    const value = parseInt(await randomOrgResponse.text().trim());
+                    console.log('Using Random.org atmospheric noise');
+                    return value % 2 === 1;
+                }
+            } catch (e) {
+                console.warn('Secondary quantum source failed:', e);
+            }
+
+            // Final fallback to crypto.getRandomValues
+            console.log('Using cryptographic randomness fallback');
+            const array = new Uint8Array(1);
+            crypto.getRandomValues(array);
+            return array[0] % 2 === 1;
+
+        } catch (error) {
+            // Absolute last resort
+            console.warn('All random sources failed, using basic Math.random:', error);
+            return Math.random() < 0.5;
+        }
     }
 
     async butterflyEffectFlip() {
