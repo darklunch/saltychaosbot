@@ -350,12 +350,10 @@ class SaltyBetBot {
 
     async secureCoinFlip() {
         try {
-            // Try primary quantum source (ANU QRNG)
+            // Try primary quantum source (ANU QRNG) through CORS proxy
             try {
-                const quantumResponse = await fetch('https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8', {
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
-                    },
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const quantumResponse = await fetch(proxyUrl + encodeURIComponent('https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8'), {
                     timeout: 2000
                 });
                 if (quantumResponse.ok) {
@@ -367,12 +365,10 @@ class SaltyBetBot {
                 console.warn('Primary quantum source failed:', e);
             }
 
-            // Fallback to Random.org
+            // Fallback to Random.org through CORS proxy
             try {
-                const randomOrgResponse = await fetch('https://www.random.org/integers/?num=1&min=0&max=255&col=1&base=10&format=plain&rnd=new', {
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
-                    },
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const randomOrgResponse = await fetch(proxyUrl + encodeURIComponent('https://www.random.org/integers/?num=1&min=0&max=255&col=1&base=10&format=plain&rnd=new'), {
                     timeout: 2000
                 });
                 if (randomOrgResponse.ok) {
